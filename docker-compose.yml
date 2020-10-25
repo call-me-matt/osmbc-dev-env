@@ -1,0 +1,43 @@
+version: '2'
+
+volumes:
+    db-data:
+
+networks:
+    osmbc:
+
+services:
+    db:
+        image: postgres:latest
+        restart: always
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        environment:
+            - NODE_ENV=development
+            - OSMUSERNAME=yourUsername
+            - POSTGRES_PASSWORD=postgres
+        networks:
+            - osmbc
+
+    php:
+        build: ./osmbc/
+        volumes:
+            - ./osmbc/config.development.json:/var/www/osmbc/config.development.json:ro
+        restart: always
+        environment:
+            - NODE_ENV=development
+        depends_on:
+            - db
+        networks:
+            - osmbc
+
+#    omgwtfssl:
+#        image: paulczar/omgwtfssl
+#        volumes:
+#            - web-certs:/certs
+#        environment:
+#            # CHANGE IT TO YOU DOMAIN NAME
+#            - SSL_SUBJECT=dev.domain.com
+#        networks:
+#            - osmbc
+
