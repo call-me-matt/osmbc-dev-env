@@ -58,7 +58,6 @@
   "EmailSender":"noreply@gmail.com",
   "url":"https://testosm.bc",
   "SMTP":{},
-  "sessionStore":"connect-pg-simple",
   "apiKey":"testapikey",
   "apiKey.TBC":"testapikey.TBC",
   "apiKeys":{
@@ -72,29 +71,15 @@
   "CalendarDateFormat":"L",
   "WelcomeInterval":"1 month",
   "userIsOldInDays":60,
-  "CalendarInterface":{
-    "fakeCalendar":{
-      "refreshurl":"this is a refresh url",
-      "url":"http://127.0.0.1:33333/fakeCalendar",
-      "events":"events",
-      "timestamp":"time",
-      "startDate":"start",
-      "endDate":"end",
-      "desc":"description",
-      "markdown": "description",
-      "text":"description",
-      "big":"Big",
-      "town": "town",
-      "country":"country"
-    }
-  },
-  "PublicCalendarPage":"http://linktopubliccalendar.org",
   "WelcomeRefreshInSeconds":0,
   "createGuestUsersAutomatic":true,
-  "ReviewInWP":["DE"],
   "scripts":{
   },
   "User-Agent": "Hello i am Kitty",
-  "DeeplAPIKey":"Test Key Fake",
-  "blogTranslationVisibleFor":["TheFive","TheOther"]
+  "DeeplConfig": {
+    "authKey":"Test Key Fake",
+    "url":"https://api.deepl.com/v2/translate"
+  },
+  "blogTranslationVisibleFor":["TheFive","TheOther"],
+  "urlWoErrorWhileEdit": []
 }
