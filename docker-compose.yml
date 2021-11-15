@@ -8,7 +8,7 @@ networks:
 
 services:
     db:
-        image: postgres:latest
+        image: postgres:10
         restart: always
         volumes:
             - db-data:/var/lib/postgresql/data
@@ -19,7 +19,7 @@ services:
         networks:
             - osmbc
 
-    php:
+    node:
         build: ./osmbc/
         volumes:
             - ./osmbc/config.development.json:/var/www/osmbc/config.development.json:ro
