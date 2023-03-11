@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:19
 
 # clone osmbc
 RUN git clone https://github.com/TheFive/osmbc.git /var/www/osmbc

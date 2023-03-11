@@ -8,8 +8,8 @@ networks:
 
 services:
     db:
-        image: postgres:10
-        restart: always
+        image: postgres:12
+        #restart: always
         volumes:
             - db-data:/var/lib/postgresql/data
         environment:
@@ -23,21 +23,25 @@ services:
         build: ./osmbc/
         volumes:
             - ./osmbc/config.development.json:/var/www/osmbc/config.development.json:ro
-        restart: always
+            - ./web-certs/cert.pem:/Users/TheFive.osm/.localhost-ssl/localhost.crt
+            - ./web-certs/key.pem:/Users/TheFive.osm/.localhost-ssl/localhost.key
+        #restart: always
         environment:
             - NODE_ENV=development
         depends_on:
             - db
         networks:
             - osmbc
+        expose:
+            - 35043
 
-#    omgwtfssl:
-#        image: paulczar/omgwtfssl
-#        volumes:
-#            - web-certs:/certs
-#        environment:
-#            # CHANGE IT TO YOU DOMAIN NAME
-#            - SSL_SUBJECT=dev.domain.com
-#        networks:
-#            - osmbc
+    omgwtfssl:
+        image: paulczar/omgwtfssl
+        volumes:
+            - ./web-certs:/certs
+        environment:
+            # CHANGE IT TO YOU DOMAIN NAME
+            - SSL_SUBJECT=localhost
+        networks:
+            - osmbc
 

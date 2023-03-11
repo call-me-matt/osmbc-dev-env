@@ -1,5 +1,7 @@
 {
   "serverport": 35043,
+  "serverkey": "/Users/TheFive.osm/.localhost-ssl/localhost.key",
+  "servercert": "/Users/TheFive.osm/.localhost-ssl/localhost.crt",
 
   "postgres": {
     "initialise": true,
@@ -43,20 +45,20 @@
   "SessionSecret":"keyboard cat",
   "SessionName":"session name",
   "AppName":"TESTBC",
-  "languages":["DE","EN","ES","PT-PT"],
-  "moment_locale":{
-    "EN":"en-gb"},
-  "callbackUrl":"http://127.0.0.1:35043/auth/openstreetmap/callback",
-  "OPENSTREETMAP_CONSUMER_KEY" : "######",
-  "OPENSTREETMAP_CONSUMER_SECRET" : "#####",
+  "languages":[
+    {"lid":"DE","displayLong":"German","displayShort":"DED","deeplProFormality":"less"}, 
+    {"lid":"EN","momentLocale":"en-gb"},
+    {"lid":"ES","displayLong":"Spain","displayShort":"ES"},
+    {"lid":"PT-PT","deeplProSource":"PT","deeplProTarget":"PT-PT","bingPro":"PT-BP"}
+  ],
   "htmlroot":"",
-  "style":"file://users/Users/TheFive.osm/development/osmbc/public/stylesheets/style.css",
-  "bootstrap":"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5",
-  "jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1",
-  "font_awesome":"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0",
+  "style":"/stylesheets/style.css",
+  "bootstrap":"",
+  "jquery":"",
   "ReviewInWP":["DE"],
   "EmailSender":"noreply@gmail.com",
-  "url":"https://testosm.bc",
+  "cookieMaxAge": 10000,
+  "url":"http://localhost:35043",
   "SMTP":{},
   "apiKey":"testapikey",
   "apiKey.TBC":"testapikey.TBC",
@@ -67,7 +69,6 @@
   "maillog_directory":".",
   "maillog_prefix":"maillogTest%DATE%.log",
   "maillog_dateformat":"[]",
-  "MS_TranslateApiKey":"hidden",
   "CalendarDateFormat":"L",
   "WelcomeInterval":"1 month",
   "userIsOldInDays":60,
@@ -76,10 +77,41 @@
   "scripts":{
   },
   "User-Agent": "Hello i am Kitty",
-  "DeeplConfig": {
+  "DeeplProConfig": {
     "authKey":"Test Key Fake",
     "url":"https://api.deepl.com/v2/translate"
   },
+  "BingProConfig": {
+    "authKey":"hidden"
+  },
+ 
   "blogTranslationVisibleFor":["TheFive","TheOther"],
-  "urlWoErrorWhileEdit": []
+  "urlWoErrorWhileEdit": [],
+  "limitValues": { "limitWindowsMs": 1000,"limitMaxCount":500},
+  "auth": {
+    "openstreetmap": {
+      "enabled":true,
+      "OPENSTREETMAP_CONSUMER_KEY" : "######",
+      "OPENSTREETMAP_CONSUMER_SECRET" : "#####",
+      "callbackUrl":"http://127.0.0.1:35043/auth/openstreetmap/callback"
+    },
+    "htaccess": {
+      "enabled": true
+    },
+    "openstreetmap_oauth20": {
+      "enabled": true,
+      "authorizationURL": "https://www.openstreetmap.org/oauth2/authorize",
+      "tokenURL": "https://www.openstreetmap.org/oauth2/token",
+      "clientID": "#####",
+      "clientSecret": "#####",
+      "callbackUrl":"http://127.0.0.1:35043/auth/openstreetmap_oautb20/callback",
+      "scope": "read_prefs"
+    }
+  },
+  "media folder": {
+    "local": "/localMediaFOlder",
+    "remote": "https://extern.site",
+    "externally mirrored": true
+  },
+  "Blog Title For Export": "weeklyOSM"
 }
