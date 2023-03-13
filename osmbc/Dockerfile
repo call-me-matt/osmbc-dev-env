@@ -17,8 +17,6 @@ RUN npm install
 RUN apt-get clean && apt-get --yes --quiet autoremove --purge \
     && rm -Rf /tmp/*
 
-RUN touch init-db.flag
-
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]

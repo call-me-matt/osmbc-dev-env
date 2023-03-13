@@ -9,12 +9,11 @@ networks:
 services:
     db:
         image: postgres:12
-        #restart: always
         volumes:
             - db-data:/var/lib/postgresql/data
         environment:
             - NODE_ENV=development
-            - OSMUSERNAME=yourUsername
+            - OSMUSERNAME=MatthiasMatthias
             - POSTGRES_PASSWORD=postgres
         networks:
             - osmbc
@@ -23,17 +22,23 @@ services:
         build: ./osmbc/
         volumes:
             - ./osmbc/config.development.json:/var/www/osmbc/config.development.json:ro
-            - ./web-certs/cert.pem:/Users/TheFive.osm/.localhost-ssl/localhost.crt
-            - ./web-certs/key.pem:/Users/TheFive.osm/.localhost-ssl/localhost.key
-        #restart: always
+            - ./osmbc/config.development.json:/var/www/osmbc/config.master.json:ro
+            - ./web-certs/cert.pem:/Users/TheFive.osm/.localhost-ssl/localhost.crt:ro
+            - ./web-certs/key.pem:/Users/TheFive.osm/.localhost-ssl/localhost.key:ro
+            # only temporary for db import faulty:
+            - ../osmbc/import/createdb.js:/var/www/osmbc/import/createdb.js
+            # workaround:
+            - ./osmbc/osmbc_data.pgdump:/var/www/osmbc/osmbc_data.pgdump:ro
+            - ./osmbc/test_pwd:/var/www/osmbc/test_pwd:ro
         environment:
             - NODE_ENV=development
+            - PGPASSWORD=postgres
         depends_on:
             - db
         networks:
             - osmbc
-        expose:
-            - 35043
+        ports:
+            - 35043:35043
 
     omgwtfssl:
         image: paulczar/omgwtfssl
