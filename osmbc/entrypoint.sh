@@ -2,12 +2,9 @@
 
 if [ ! -f db-ready.flag ]; then
    echo "First start, creating database."
-   node ./import/createdb.js --createTables --dropTables --createView --createIndex --addUser $OSMUSERNAME --verbose # && touch db-ready.flag
-   # workaround: import database from dump as above not working :-/
-   #apt update
-   #apt -y install postgresql-client
-   #psql --host db postgres -U postgres < osmbc_data.pgdump
-   touch db-ready.flag
+   node ./import/createdb.js --createTables --dropTables --createView --createIndex --verbose --addUser $OSMUSERNAME && touch db-ready.flag
+   echo "add local login with password 'test'"
+   echo "$OSMUSERNAME:\$2y\$05\$WbBcRVSTP5nOPhcQs6HTguemtIJrkKAUvElBZ7Kkme5R7rBn6e92a" > /var/www/osmbc/test_pwd
 fi
 
 # startup

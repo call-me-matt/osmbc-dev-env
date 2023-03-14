@@ -9,30 +9,28 @@ networks:
 services:
     db:
         image: postgres:12
-        volumes:
-            - db-data:/var/lib/postgresql/data
         environment:
             - NODE_ENV=development
-            - OSMUSERNAME=MatthiasMatthias
             - POSTGRES_PASSWORD=postgres
+        volumes:
+            - db-data:/var/lib/postgresql/data
         networks:
             - osmbc
 
     node:
         build: ./osmbc/
+        environment:
+            - NODE_ENV=development
+            - PGPASSWORD=postgres
+            - OSMUSERNAME=yourOsmUsername
+            #- DEBUG=OSMBC:model:pgMap
         volumes:
             - ./osmbc/config.development.json:/var/www/osmbc/config.development.json:ro
             - ./osmbc/config.development.json:/var/www/osmbc/config.master.json:ro
             - ./web-certs/cert.pem:/Users/TheFive.osm/.localhost-ssl/localhost.crt:ro
             - ./web-certs/key.pem:/Users/TheFive.osm/.localhost-ssl/localhost.key:ro
-            # only temporary for db import faulty:
+            # temporary fix until PR 979 is merged:
             - ../osmbc/import/createdb.js:/var/www/osmbc/import/createdb.js
-            # workaround:
-            - ./osmbc/osmbc_data.pgdump:/var/www/osmbc/osmbc_data.pgdump:ro
-            - ./osmbc/test_pwd:/var/www/osmbc/test_pwd:ro
-        environment:
-            - NODE_ENV=development
-            - PGPASSWORD=postgres
         depends_on:
             - db
         networks:
