@@ -29,8 +29,6 @@ services:
             - ./osmbc/config.development.json:/var/www/osmbc/config.master.json:ro
             - ./web-certs/cert.pem:/Users/TheFive.osm/.localhost-ssl/localhost.crt:ro
             - ./web-certs/key.pem:/Users/TheFive.osm/.localhost-ssl/localhost.key:ro
-            # temporary fix until PR 979 is merged:
-            - ../osmbc/import/createdb.js:/var/www/osmbc/import/createdb.js
         depends_on:
             - db
         networks:
