@@ -1,3 +1,3 @@
 web-certs/
-osmbc/config.production.json
-osmbc/osmbc_data.pgdump
+build/config.production.json
+build/osmbc_data.pgdump

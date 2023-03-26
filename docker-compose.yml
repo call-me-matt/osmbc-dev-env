@@ -1,7 +1,8 @@
-version: '2'
+version: '2.1'
 
 volumes:
     db-data:
+    web-certs:
 
 networks:
     osmbc:
@@ -9,6 +10,7 @@ networks:
 services:
     db:
         image: postgres:12
+        restart: always
         environment:
             - NODE_ENV=development
             - POSTGRES_PASSWORD=postgres
@@ -18,17 +20,18 @@ services:
             - osmbc
 
     node:
-        build: ./osmbc/
+        build: ./build/
         environment:
             - NODE_ENV=development
             - PGPASSWORD=postgres
-            - OSMUSERNAME=yourOsmUsername
+            - OSMUSERNAME=MatthiasMatthias
             #- DEBUG=OSMBC:model:pgMap
         volumes:
-            - ./osmbc/config.development.json:/var/www/osmbc/config.development.json:ro
-            - ./osmbc/config.development.json:/var/www/osmbc/config.master.json:ro
-            - ./web-certs/cert.pem:/Users/TheFive.osm/.localhost-ssl/localhost.crt:ro
-            - ./web-certs/key.pem:/Users/TheFive.osm/.localhost-ssl/localhost.key:ro
+            - ./osmbc:/var/www/osmbc
+            - ./build/config.development.json:/var/www/osmbc/config.development.json:ro
+            - ./build/config.development.json:/var/www/osmbc/config.master.json:ro
+            - ./build/entrypoint.sh:/var/www/osmbc/entrypoint.sh:ro
+            - web-certs:/Users/TheFive.osm/.localhost-ssl:ro
         depends_on:
             - db
         networks:
@@ -39,10 +42,11 @@ services:
     omgwtfssl:
         image: paulczar/omgwtfssl
         volumes:
-            - ./web-certs:/certs
+            - web-certs:/certs
         environment:
-            # CHANGE IT TO YOU DOMAIN NAME
             - SSL_SUBJECT=localhost
+            - SSL_KEY=localhost.key
+            - SSL_CERT=localhost.crt
         networks:
             - osmbc
 
