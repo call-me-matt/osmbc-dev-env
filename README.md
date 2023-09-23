@@ -18,6 +18,8 @@ Provides the OSM Blog Collector at https://localhost:35043 - self-signed certifi
 
 For login, chose `local/htaccess` method, the user name is your OSM user and the password is `test`.
 
+To run tests, execute `docker compose run --entrypoint "npm test" node`
+
 ## Development
 
 Make your changes in the `osmbc` directory.

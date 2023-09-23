@@ -28,8 +28,10 @@ services:
             #- DEBUG=OSMBC:model:pgMap
         volumes:
             - ./osmbc:/var/www/osmbc
-            - ./build/config.development.json:/var/www/osmbc/config.development.json:ro
-            - ./build/config.development.json:/var/www/osmbc/config.master.json:ro
+            - ./build/test_pwd:/var/www/osmbc/test_pwd
+            - ./build/config.json:/var/www/osmbc/config.master.json:ro
+            - ./build/config.json:/var/www/osmbc/config.development.json:ro
+            - ./build/config.json:/var/www/osmbc/config.test.json:ro
             - ./build/entrypoint.sh:/var/www/osmbc/entrypoint.sh:ro
             - web-certs:/Users/TheFive.osm/.localhost-ssl:ro
         depends_on:

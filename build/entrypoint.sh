@@ -7,8 +7,9 @@ fi
 if [ ! -f installed.flag ]; then
    echo "First start, installing OSMBC and dependencies."
    # install osmbc and dependencies
-   git clone https://github.com/TheFive/osmbc.git /tmp/osmbc
+   git clone -b develop https://github.com/TheFive/osmbc.git /tmp/osmbc
    cp -a /tmp/osmbc/. .
+   git config --global --add safe.directory /var/www/osmbc
    npm install nyc -g
    npm install mocha -g
    npm install
@@ -18,10 +19,13 @@ if [ ! -f installed.flag ]; then
    echo "initializing database..."
    node ./import/createdb.js --createTables --dropTables --createView --createIndex --verbose --addUser $OSMUSERNAME
    echo "add local login with password 'test'"
-   echo "$OSMUSERNAME:\$2y\$05\$WbBcRVSTP5nOPhcQs6HTguemtIJrkKAUvElBZ7Kkme5R7rBn6e92a" > /var/www/osmbc/test_pwd
+   echo "$OSMUSERNAME:\$2y\$05\$WbBcRVSTP5nOPhcQs6HTguemtIJrkKAUvElBZ7Kkme5R7rBn6e92a" >> /var/www/osmbc/test_pwd
    # flag as installed
    touch installed.flag
 fi
+
+# trust external changes
+git config --global --add safe.directory /var/www/osmbc
 
 # startup
 npm start
