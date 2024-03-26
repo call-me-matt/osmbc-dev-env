@@ -45,6 +45,7 @@
   "SessionSecret":"keyboard cat",
   "SessionName":"session name",
   "AppName":"TESTBC",
+  "MaxDiffLength": 1500,
   "languages":[
     {"lid":"DE","displayLong":"German","displayShort":"DED","deeplProFormality":"less"}, 
     {"lid":"EN","momentLocale":"en-gb"},
@@ -79,10 +80,8 @@
   "User-Agent": "Hello i am Kitty",
   "DeeplProConfig": {
     "authKey":"Test Key Fake",
-    "url":"https://api.deepl.com/v2/translate"
-  },
-  "BingProConfig": {
-    "authKey":"hidden"
+    "url":"https://api.deepl.com/v2/translate",
+    "usageUrl":"https://api.deepl.com/v2/usage"
   },
  
   "blogTranslationVisibleFor":["TheFive","TheOther"],
